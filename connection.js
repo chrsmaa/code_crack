@@ -1,5 +1,6 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://test:test@code-crack.z7pjg.mongodb.net/?retryWrites=true&w=majority&appName=Code-Crack";
+
+const uri = "mongodb+srv://repatonicole:PPnN2SnABBVhy0pH@codecrack.m9gaj.mongodb.net/?retryWrites=true&w=majority&appName=codecrack";
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -11,10 +12,8 @@ const client = new MongoClient(uri, {
 
 async function connectToDatabase() {
   try {
-    if (!client.isConnected) {
-      await client.connect();
-      console.log("Successfully connected to MongoDB!");
-    }
+    await client.connect();
+    console.log("Successfully connected to MongoDB!");
     return client.db("Code-Crack");
   } catch (err) {
     console.error("Failed to connect to MongoDB:", err);

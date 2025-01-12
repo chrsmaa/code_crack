@@ -1,28 +1,28 @@
 // Import required modules
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const quizRoutes = require('./routes/quizRoute');
 const authRoutes = require('./routes/authRoute');
 
 // Initialize the Express app
 const app = express();
-const PORT = 3000;
+const PORT = 3002;
 
-// Middleware to parse JSON requests
+// Middleware
 app.use(express.json());
+app.use(cors());
 
-// Middleware to ensure DB connection is available before processing routes
+// Connect to MongoDB
 mongoose
-  .connect("mongodb+srv://test:test@code-crack.z7pjg.mongodb.net/?retryWrites=true&w=majority&appName=Code-Crack")
-  .then(() => console.log('MongoDB Connected'.green))
-  .catch((err) => console.log("Error:", err.red));
+  .connect("mongodb+srv://repatonicole:PPnN2SnABBVhy0pH@codecrack.m9gaj.mongodb.net/?retryWrites=true&w=majority&appName=codecrack", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.error("Database connection error:", err));
 
-  app.use(bodyParser.json());
-  app.use(cors());
-
-
+// Routes
 app.use('/api/quizzes', quizRoutes);
 app.use('/api/users', authRoutes);
 
